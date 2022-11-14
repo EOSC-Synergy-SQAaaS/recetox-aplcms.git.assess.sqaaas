@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.5
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ljocha/recetox-aplcms:
+      branch: master
+      repo: https://github.com/ljocha/recetox-aplcms.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ljocha/recetox-aplcms git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-ochre-turkey.sh
+        container: qc.acc_sleepy-razzmatazz-manatee
+  QC.Doc:
+    repos:
+      github.com/ljocha/recetox-aplcms find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snazzy-plum-coyote.sh
+        container: qc.doc_lumpy-amaranth-tetra
+      github.com/ljocha/recetox-aplcms git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-cerulean-leopard.sh
+        container: qc.doc_flimsy-lemon-malamute
+      github.com/ljocha/recetox-aplcms markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-amethyst-wolf.sh
+        container: qc.doc_sloppy-ruby-guppy
+  QC.Lic:
+    repos:
+      github.com/ljocha/recetox-aplcms licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-cerise-ferret.sh
+        container: qc.lic_fuzzy-flax-blue
+  QC.Sty:
+    repos:
+      github.com/ljocha/recetox-aplcms hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-orange-magpie.sh
+        container: qc.sty_tasty-cyan-duck
+      github.com/ljocha/recetox-aplcms jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-dandelion-robin.sh
+        container: qc.sty_muzzy-viridian-moose
+  QC.Ver:
+    repos:
+      github.com/ljocha/recetox-aplcms get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-green-ladybird.sh
+        container: qc.ver_scaly-asparagus-yak
+timeout: 1800
